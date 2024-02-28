@@ -1,0 +1,11 @@
+.input-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.input-container > svg {
+  width: 10px;
+  cursor: pointer;
+}

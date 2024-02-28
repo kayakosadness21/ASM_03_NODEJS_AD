@@ -1,0 +1,51 @@
+.dashboard-container {
+  width: 70%;
+  margin: auto;
+}
+.dashboard-header {
+  display: flex;
+  width: 100%;
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.5);
+}
+.dashboard-header .client,
+.earning {
+  width: 33.33%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+}
+.dashboard-header svg {
+  width: 20px;
+  height: 20px;
+  fill: rgba(128, 128, 128, 0.5);
+}
+.dashboard-header .label {
+  color: rgba(128, 128, 128, 0.5);
+  font-size: 12px;
+}
+.dashboard-container .number {
+  font-weight: 600;
+  font-size: 24px;
+  display: flex;
+  gap: 5px;
+}
+.dashboard-header .earning-left span {
+  font-size: 12px;
+  padding-top: 4px;
+}
+
+.dashboard-content {
+  display: grid;
+  /* grid-template-columns: 2fr 1fr;
+    gap: 30px; */
+  margin-top: 30px;
+}
+
+.dashboard-table-container {
+  margin: 20px 0px;
+  padding: 20px;
+  box-shadow: 1px 1px 10px 1px rgba(128, 128, 128, 0.5);
+  border-radius: 5px;
+}

@@ -1,0 +1,80 @@
+.modal-container {
+  background-color: white;
+  padding-top: 30px;
+  width: 1000px;
+  height: 500px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 200;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  transform: translate(-50%, -50%);
+  animation: slowShow 0.3s ease-in-out;
+}
+@keyframes slowShow {
+  from {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  to {
+    background-color: white;
+  }
+}
+.ami-close {
+  animation: slowClose 0.3s ease-in-out;
+}
+@keyframes slowClose {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-50%, -70%);
+  }
+}
+
+.modal-container .close {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  right: 15px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.image img {
+  width: 100%;
+}
+
+.modal-container .content {
+  padding: 20px 50px;
+}
+
+.modal-container .content .desc {
+  height: 250px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.modal-container .content .desc::-webkit-scrollbar {
+  width: 6px;
+  background-color: white;
+}
+.modal-container .content .desc::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.content p {
+  font-size: 12px;
+  color: grey;
+  line-height: 25px;
+}
+.content svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+  padding-right: 10px;
+}
+
+.content button {
+  display: flex;
+  align-items: flex-end;
+}

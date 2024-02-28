@@ -1,0 +1,32 @@
+.menu-container {
+  font-style: italic;
+}
+.menu-container > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.menu-container > ul > li,
+.menu-container > p {
+  padding: 10px 20px;
+  color: rgba(128, 128, 128, 0.5);
+}
+.menu-container > ul > li:hover,
+.menu-container > p:hover {
+  color: rgb(227, 131, 14);
+  cursor: pointer;
+}
+
+.menu-container .active {
+  color: rgb(227, 131, 14);
+}
+
+.menu-container .header {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+}
+.menu-container .sub-header {
+  background-color: rgba(128, 128, 128, 0.1);
+  padding: 10px 20px;
+}

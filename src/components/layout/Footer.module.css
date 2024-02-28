@@ -1,0 +1,19 @@
+.footer-container {
+  background-color: black;
+  font-style: italic;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 50px 70px;
+  justify-items: center;
+}
+
+.footer-container ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-container ul a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,31 @@
+.cart-table {
+  font-style: italic;
+  font-size: 16px;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.cart-table .header {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+.cart-table .header > th {
+  padding: 10px;
+  font-weight: 500;
+}
+.cart-table tr td {
+  padding: 20px 0;
+  color: rgba(128, 128, 128, 0.5);
+}
+.cart-table .product {
+  font-weight: 600;
+}
+
+.cart-table img {
+  width: 50%;
+}
+
+.cart-table .delete {
+  width: 15px;
+  fill: grey;
+  cursor: pointer;
+}

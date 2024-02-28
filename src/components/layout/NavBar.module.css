@@ -1,0 +1,53 @@
+.container {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+ul {
+  list-style-type: none;
+  font-style: italic;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 0;
+}
+ul li {
+  cursor: pointer;
+}
+ul li div {
+  padding-left: 5px;
+}
+
+.cart-icon {
+  width: 20px;
+  fill: grey;
+}
+.list-icon {
+  width: 15px;
+  fill: grey;
+}
+.login-icon {
+  width: 15px;
+  fill: grey;
+}
+.login-icon-arrow-down {
+  width: 10px;
+  margin-right: 10px;
+}
+
+.nav-bar-center {
+  font-style: italic;
+  place-self: center;
+  font-size: 20px;
+}
+.nav-bar-right li {
+  display: flex;
+  flex-direction: row;
+  /* gap: 5px; */
+}
+.active {
+  color: rgb(227, 131, 14);
+}

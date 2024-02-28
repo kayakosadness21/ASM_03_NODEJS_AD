@@ -1,0 +1,19 @@
+.background {
+  width: 100vw;
+  height: 100vh;
+  /* background-color: hsla(0, 0%, 0%, 0.8); */
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  animation: 0.5s slowShow ease-in-out;
+}
+@keyframes slowShow {
+  from {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}

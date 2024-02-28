@@ -1,0 +1,31 @@
+.banner-container {
+  width: 70%;
+  margin: auto;
+  position: relative;
+}
+
+.banner-container img {
+  width: 100%;
+}
+
+.banner-container .content {
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  transform: translateY(-50%);
+}
+.banner-container .inspiration {
+  font-size: 10px;
+  font-style: italic;
+  color: gray;
+  word-spacing: 2px;
+  margin-bottom: 10px;
+}
+.banner-container .sale,
+.season {
+  font-size: 30px;
+  font-style: italic;
+}
+.banner-container .season {
+  margin-bottom: 15px;
+}

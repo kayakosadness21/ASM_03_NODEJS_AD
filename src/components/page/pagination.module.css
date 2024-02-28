@@ -1,0 +1,38 @@
+.pagination-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-end; */
+  margin-bottom: 20px;
+}
+.pagination-controller {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.pagination-container > label {
+  background-color: none;
+  color: grey;
+  align-self: flex-end;
+}
+
+.pagination-container svg {
+  width: 15px;
+}
+
+.pagination-container .arrow-left,
+.pagination-container .arrow-right {
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.pagination-container .arrow-left:hover,
+.pagination-container .arrow-right:hover {
+  fill: grey;
+}
+
+.pagination-controller label {
+  padding: 5px 10px;
+  background-color: rgba(128, 128, 128, 0.5);
+  color: white;
+}

@@ -1,0 +1,132 @@
+.chat-window-container {
+  background-color: white;
+  width: 100%;
+  right: 200px;
+  bottom: 300px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+/* CSS chat-content */
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 370px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.chat-content::-webkit-scrollbar {
+  width: 6px;
+  height: 100px;
+}
+.chat-content::-webkit-scrollbar-thumb {
+  background-color: rgb(48, 42, 42);
+}
+.chat-content::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.chat-customer-container {
+  display: flex;
+  flex-direction: column;
+}
+.chat-admin-container {
+  width: 65%;
+}
+.chat-content .chat-customer {
+  background-color: rgb(72, 176, 247);
+  color: white;
+  font-style: italic;
+  font-size: 12px;
+  margin: 5px 10px 5px 0px;
+  padding: 10px;
+  border-radius: 5px;
+  align-self: flex-end;
+  max-width: 70%;
+}
+
+.chat-line {
+  display: flex;
+  gap: 10px;
+}
+.chat-content .chat-admin {
+  background-color: rgba(128, 128, 128, 0.1);
+  color: grey;
+  font-style: italic;
+  font-size: 12px;
+  margin: 5px 0px 5px 0px;
+  padding: 10px;
+  border-radius: 5px;
+  align-self: flex-start;
+}
+
+.typing {
+  font-style: italic;
+  font-size: 12px;
+  color: grey;
+  margin-left: 10px;
+}
+
+.admin-icon {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(128, 128, 128, 0.2);
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+/* CSS Footer */
+.chat-footer {
+  background-color: rgba(128, 128, 128, 0.1);
+  padding: 20px 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.chat-footer input {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  outline: none;
+}
+.chat-footer svg {
+  width: 20px;
+  fill: grey;
+  cursor: pointer;
+}
+.paper-plane {
+  fill: rgb(72, 176, 247) !important;
+}
+
+/* @keyframes show-chat {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0;
+    right: 180px;
+    bottom: 280px;
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+} */
+
+/* @keyframes hoverChatApp {
+  from {
+    background-color: rgba(128, 128, 128, 0.5);
+  }
+  to {
+    background-color: rgba(128, 128, 128, 0.8);
+  }
+} */
