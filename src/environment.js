@@ -5,6 +5,9 @@ const environment = {
             cart: {
                 origin: "/cart",
                 getCartUser: "/cart/user"
+            },
+            user: {
+                origin: "/user"
             }
         }
     },
