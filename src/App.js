@@ -15,6 +15,10 @@ import ProductAddNew from "./components/pages/ProductAddNew";
 import PageUserHome from "./components/pages/page-user/page-user-home/page-user-home";
 import PageUserAdd from "./components/pages/page-user/page-user-add/page-user-add";
 
+// ROLE
+import PageRoleHome from "./components/pages/page-role/page-role-home/page-role-home";
+import PageRoleAdd from "./components/pages/page-role/page-role-add/page-user-add";
+
 function App() {
   const { isLoggedIn, isAdmin } = useSelector((state) => state.logInReducer);
   // useEffect(() => {
@@ -45,6 +49,7 @@ function App() {
           path="/products/add-new"
           element={isLoggedIn && isAdmin ? <ProductAddNew /> : ""}
         />
+
         {/* USER */}
         <Route
           path="/users"
@@ -53,6 +58,16 @@ function App() {
         <Route
           path="/users-add"
           element={isLoggedIn && isAdmin ? <PageUserAdd /> : ""}
+        />
+
+        {/* ROLE */}
+        <Route
+          path="/roles"
+          element={isLoggedIn && isAdmin ? <PageRoleHome /> : ""}
+        />
+        <Route
+          path="/roles-add"
+          element={isLoggedIn && isAdmin ? <PageRoleAdd /> : ""}
         />
         <Route path="/chat-room" element={isLoggedIn ? <ChatRoom /> : ""} />
       </Routes>

@@ -23,7 +23,6 @@ const PageUserHome = (props) => {
             if(!res.ok) throw new Error("Call api unsuccess");
             let { status, users} = await res.json();
             if(status) {
-                console.log(users);
                 setUsers(users);
             }
         }
