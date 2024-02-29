@@ -9,6 +9,7 @@ const environment = {
             user: {
                 origin: "/user",
                 newUser: '/user/new',
+                destroyUser: '/user/destroy'
             }
         }
     },
