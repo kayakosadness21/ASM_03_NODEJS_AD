@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import environment from "../../../../environment";
 
-import classes from "./page-user-add.module.css";
+import classes from "./page-role-add.module.css";
 
 const PageRoleAdd = (props) => {
     const navigate = useNavigate();
