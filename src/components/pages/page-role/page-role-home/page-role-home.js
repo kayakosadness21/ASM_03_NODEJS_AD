@@ -35,6 +35,11 @@ const PageRoleHome = (props) => {
         navigate("/roles-add");
     }
 
+    const onRedirectEditRoleHandler = (event) => {
+        let { id } = event.target.dataset;
+        navigate(`/roles-edit/${id}`);
+    }
+
     return (
         <div className={classes['page-role-component']}>
             <div className="container">
@@ -62,7 +67,10 @@ const PageRoleHome = (props) => {
                                         <button
                                             className="btn btn-danger mr-2"
                                             data-id={role._id}>Xoá</button>
-                                        <button className="btn btn-warning">Sửa</button>
+                                        <button
+                                            data-id={role._id}
+                                            onClick={onRedirectEditRoleHandler}
+                                            className="btn btn-warning">Sửa</button>
                                     </td>
                                 </tr>
                             )

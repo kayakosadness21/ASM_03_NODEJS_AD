@@ -17,7 +17,8 @@ import PageUserAdd from "./components/pages/page-user/page-user-add/page-user-ad
 
 // ROLE
 import PageRoleHome from "./components/pages/page-role/page-role-home/page-role-home";
-import PageRoleAdd from "./components/pages/page-role/page-role-add/page-user-add";
+import PageRoleAdd from "./components/pages/page-role/page-role-add/page-role-add";
+import PageRoleEdit from "./components/pages/page-role/page-role-edit/page-role-edit";
 
 function App() {
   const { isLoggedIn, isAdmin } = useSelector((state) => state.logInReducer);
@@ -68,6 +69,10 @@ function App() {
         <Route
           path="/roles-add"
           element={isLoggedIn && isAdmin ? <PageRoleAdd /> : ""}
+        />
+        <Route
+          path="/roles-edit/:id"
+          element={isLoggedIn && isAdmin ? <PageRoleEdit /> : ""}
         />
         <Route path="/chat-room" element={isLoggedIn ? <ChatRoom /> : ""} />
       </Routes>
