@@ -13,6 +13,7 @@ import ProductAddNew from "./components/pages/ProductAddNew";
 
 // USER
 import PageUserHome from "./components/pages/page-user/page-user-home/page-user-home";
+import PageUserAdd from "./components/pages/page-user/page-user-add/page-user-add";
 
 function App() {
   const { isLoggedIn, isAdmin } = useSelector((state) => state.logInReducer);
@@ -48,6 +49,10 @@ function App() {
         <Route
           path="/users"
           element={isLoggedIn && isAdmin ? <PageUserHome /> : ""}
+        />
+        <Route
+          path="/users-add"
+          element={isLoggedIn && isAdmin ? <PageUserAdd /> : ""}
         />
         <Route path="/chat-room" element={isLoggedIn ? <ChatRoom /> : ""} />
       </Routes>

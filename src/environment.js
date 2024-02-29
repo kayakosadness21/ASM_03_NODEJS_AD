@@ -7,7 +7,8 @@ const environment = {
                 getCartUser: "/cart/user"
             },
             user: {
-                origin: "/user"
+                origin: "/user",
+                newUser: '/user/new',
             }
         }
     },
