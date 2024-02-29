@@ -5,12 +5,13 @@ import classes from "./page-user-home.module.css";
 
 const PageUserHome = (props) => {
     const [users, setUsers] = useState([]);
+    const [reload, setReload] = useState(false);
     const navigate = useNavigate();
 
     let url = `${environment.api.url}${environment.api.user.origin}`;
+    let urlDestroy = `${environment.api.url}${environment.api.user.destroyUser}`;
 
     useEffect(() => {
-        console.log(url);
         let callApi = async () => {
             let res = await fetch(url, {
                 method: "GET",
@@ -28,10 +29,31 @@ const PageUserHome = (props) => {
         }
 
         callApi();
-    }, [])
+    }, [reload])
 
     const onNewUserHandler = (event) => {
         navigate("/users-add");
+    }
+
+    const onDeleteUserHandler = async(event) => {
+        let { id } = event.target.dataset;
+
+        if(window.confirm("Bạn có chắc xoá tài khoản này!") && id) {
+            let res = await fetch(urlDestroy, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({id})
+            })
+
+            if(!res.ok) throw new Error("Call api unsuccess");
+            let { status, } = await res.json();
+            
+            if(status) {
+                setReload(!reload);
+            }
+        }
     }
 
     return (
@@ -58,7 +80,10 @@ const PageUserHome = (props) => {
                                     <td>{user.fullName}</td>
                                     <td>{user.email}</td>
                                     <td>
-                                        <button className="btn btn-danger mr-2">Xoá</button>
+                                        <button
+                                            onClick={onDeleteUserHandler}
+                                            className="btn btn-danger mr-2"
+                                            data-id={user._id}>Xoá</button>
                                         <button className="btn btn-warning">Sửa</button>
                                     </td>
                                 </tr>
