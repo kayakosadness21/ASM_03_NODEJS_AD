@@ -45,6 +45,9 @@ const NavBar = () => {
       case "user":
         navigate("/users");
         break
+      case "role":
+        navigate("/roles");
+        break
       default:
         navigate("/");
     }
@@ -91,6 +94,15 @@ const NavBar = () => {
               className={dashboardPage ? classes.active : null}
             >
               Users
+            </li>
+
+            <li>|</li>
+            <li
+              onClick={onClickHandler}
+              name="role"
+              className={dashboardPage ? classes.active : null}
+            >
+              Roles
             </li>
 
           </>

@@ -10,6 +10,10 @@ const environment = {
                 origin: "/user",
                 newUser: '/user/new',
                 destroyUser: '/user/destroy'
+            },
+            role: {
+                origin: "/role",
+                newRole: "/role/new"
             }
         }
     },
