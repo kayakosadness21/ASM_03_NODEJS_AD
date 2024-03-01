@@ -11,6 +11,7 @@ const PageRoleHome = (props) => {
     const [reload, setReload] = useState(false);
 
     let url = `${environment.api.url}${environment.api.role.origin}`;
+    let urlDestroy = `${environment.api.url}${environment.api.role.destroyRole}`;
 
     useEffect(() => {
         let callApi = async () => {
@@ -40,6 +41,26 @@ const PageRoleHome = (props) => {
         navigate(`/roles-edit/${id}`);
     }
 
+    const onDestroyRoleHandler = async(event) => {
+        let { id } = event.target.dataset;
+        if(window.confirm("Bạn có chắc xoá phân quyền này!") && id) {
+            let res = await fetch(urlDestroy, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({id})
+            })
+
+            if(!res.ok) throw new Error("Call api unsuccess");
+            let { status, } = await res.json();
+            
+            if(status) {
+                setReload(!reload);
+            }
+        }
+    }
+
     return (
         <div className={classes['page-role-component']}>
             <div className="container">
@@ -65,6 +86,7 @@ const PageRoleHome = (props) => {
                                     <td>{role.users.length}</td>
                                     <td>
                                         <button
+                                        onClick={onDestroyRoleHandler}
                                             className="btn btn-danger mr-2"
                                             data-id={role._id}>Xoá</button>
                                         <button
