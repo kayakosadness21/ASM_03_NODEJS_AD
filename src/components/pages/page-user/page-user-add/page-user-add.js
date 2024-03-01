@@ -1,5 +1,5 @@
 "use strict"
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import environment from "../../../../environment";
@@ -8,6 +8,7 @@ import classes from "./page-user-add.module.css";
 
 const PageUserAdd = (props) => {
     const navigate = useNavigate();
+    const [roles, setRoles] = useState([]);
     
     const fullName = useRef();
     const email = useRef();
@@ -16,6 +17,27 @@ const PageUserAdd = (props) => {
     const address = useRef();
 
     const url = `${environment.api.url}${environment.api.user.newUser}`;
+    let urlRole = `${environment.api.url}${environment.api.role.origin}`;
+
+    useEffect(() => {
+        let callApi = async () => {
+            let res = await fetch(urlRole, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            if(!res.ok) throw new Error("Call api unsuccess");
+            let { status, roles} = await res.json();
+            if(status) {
+                console.log(roles);
+                setRoles(roles);
+            }
+        }
+
+        callApi();
+    }, [])
 
 
     const onNewUserHandler = async(event) => {
@@ -80,6 +102,17 @@ const PageUserAdd = (props) => {
                     <div className="form-group col-6">
                         <label htmlFor="address">Địa chỉ</label>
                         <input ref={address} type="text" className="form-control" />
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="exampleFormControlSelect1">Phân quyền</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            {roles.length > 0 && roles.map((role) => {
+                                return (
+                                    <option key={role._is} value={role._id}>{role.title}</option>
+                                )
+                            })}
+                        </select>
                     </div>
                     
                     <div className="col-12">
