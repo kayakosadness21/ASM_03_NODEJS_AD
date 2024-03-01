@@ -9,6 +9,7 @@ const environment = {
             user: {
                 origin: "/user",
                 newUser: '/user/new',
+                updateUser: '/user/update',
                 destroyUser: '/user/destroy'
             },
             role: {

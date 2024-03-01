@@ -34,6 +34,11 @@ const PageUserHome = (props) => {
         navigate("/users-add");
     }
 
+    const onRedirectEditUserHandler = (event) => {
+        let { id } = event.target.dataset;
+        navigate(`/users-edit/${id}`);
+    }
+
     const onDeleteUserHandler = async(event) => {
         let { id } = event.target.dataset;
 
@@ -62,12 +67,13 @@ const PageUserHome = (props) => {
                     <button className="btn btn-primary" onClick={onNewUserHandler}>Tạo mới</button>
                 </div>
 
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Họ và tên</th>
                         <th scope="col">E-mail</th>
+                        <th scope="col">Phân quyền</th>
                         <th scope="col">Chức năng</th>
                         </tr>
                     </thead>
@@ -78,12 +84,16 @@ const PageUserHome = (props) => {
                                     <th scope="row">{index}</th>
                                     <td>{user.fullName}</td>
                                     <td>{user.email}</td>
+                                    <td>{user.role?.title}</td>
                                     <td>
                                         <button
                                             onClick={onDeleteUserHandler}
                                             className="btn btn-danger mr-2"
                                             data-id={user._id}>Xoá</button>
-                                        <button className="btn btn-warning">Sửa</button>
+                                        <button
+                                            onClick={onRedirectEditUserHandler}
+                                            data-id={user._id}
+                                            className="btn btn-warning">Sửa</button>
                                     </td>
                                 </tr>
                             )

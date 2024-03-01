@@ -14,6 +14,7 @@ import ProductAddNew from "./components/pages/ProductAddNew";
 // USER
 import PageUserHome from "./components/pages/page-user/page-user-home/page-user-home";
 import PageUserAdd from "./components/pages/page-user/page-user-add/page-user-add";
+import PageUserEdit from "./components/pages/page-user/page-user-edit/page-user-edit";
 
 // ROLE
 import PageRoleHome from "./components/pages/page-role/page-role-home/page-role-home";
@@ -22,9 +23,7 @@ import PageRoleEdit from "./components/pages/page-role/page-role-edit/page-role-
 
 function App() {
   const { isLoggedIn, isAdmin } = useSelector((state) => state.logInReducer);
-  // useEffect(() => {
-  //   return localStorage.clear();
-  // }, []);
+
   return (
     <Layout>
       <Routes>
@@ -59,6 +58,10 @@ function App() {
         <Route
           path="/users-add"
           element={isLoggedIn && isAdmin ? <PageUserAdd /> : ""}
+        />
+        <Route
+          path="/users-edit/:id"
+          element={isLoggedIn && isAdmin ? <PageUserEdit /> : ""}
         />
 
         {/* ROLE */}
