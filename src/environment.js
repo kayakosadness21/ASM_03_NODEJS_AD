@@ -13,7 +13,8 @@ const environment = {
             },
             role: {
                 origin: "/role",
-                newRole: "/role/new"
+                newRole: "/role/new",
+                destroyRole: '/role/destroy'
             }
         }
     },
