@@ -14,6 +14,7 @@ const environment = {
             role: {
                 origin: "/role",
                 newRole: "/role/new",
+                updateRole: '/role/update',
                 destroyRole: '/role/destroy'
             }
         }
