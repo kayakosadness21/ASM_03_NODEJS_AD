@@ -21,7 +21,8 @@ const environment = {
             product: {
                 origin: "/product",
                 newProduct: "/product/new",
-                updateProduct: "/product/update"
+                updateProduct: "/product/update",
+                destroyProduct: "/product/destroy"
             }
         }
     },

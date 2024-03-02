@@ -1,21 +1,19 @@
 import classes from "./Product.module.css";
 import BannerShop from "../banner/BannerShop";
-import ProductTable from "../product/product-table";
 import { useEffect, useState } from "react";
-import { deleteProductAPI, getAllProductAPI } from "../lib/api-product";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import environment from "../../environment";
 
 const Product = () => {
   const navigate = useNavigate();
-  const { productList, deleteNotSucceed } = useSelector(
-    (state) => state.productReducer
-  );
-  const dispatch = useDispatch();
+
   const [products, setProducts] = useState([]);
+  const [reload, setReload] = useState(false);
 
   const url = `${environment.api.url}${environment.api.product.origin}`;
+  const urlDestroy = `${environment.api.url}${environment.api.product.destroyProduct}`;
+  const localState = JSON.parse(localStorage.getItem("cartState"));
 
   useEffect(() => {
     let callApi = async () => {
@@ -36,26 +34,7 @@ const Product = () => {
 
   callApi();
 
-  }, [])
-
-  // crud handler
-  // const crudHandler = (type, productId) => {
-  //   if (type === "delete") {
-  //     if (!window.confirm(`Do you want to delete id: ${productId}?`)) return;
-  //     dispatch(deleteProductAPI(productId));
-  //   }
-  //   if (type === "update") {
-  //     navigate(`/products/update/${productId}`);
-  //     // const searchResult=data.filter(item=>item._id!==payload)
-  //     // setProducts(searchResult)
-  //     // return
-  //   }
-  // };
-
-  const onDeleteProductHandler = (event) => {
-    let { id } = event.target.dataset;
-    console.log(id);
-  }
+  }, [reload])
 
   const addNewHandler = () => {
     navigate("/products/add-new");
@@ -64,6 +43,25 @@ const Product = () => {
   const onUpdateProductHandler = (event) => {
     let { id } = event.target.dataset;
     navigate(`/products/update/${id}`);
+  }
+
+  const onDestroyProductHandler = async(event) => {
+    let { id } = event.target.dataset;
+
+    let res = await fetch(urlDestroy, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": localState.logInReducer.user.token
+        },
+        body: JSON.stringify({id})
+    })
+
+    if(!res.ok) throw new Error("Call api unsuccess");
+    let { status} = await res.json();
+    if(status) {
+      setReload(!reload);
+    }
   }
 
   return (
@@ -100,7 +98,7 @@ const Product = () => {
                               <td>{product?.quantity}</td>
                               <td>
                                   <button
-                                      onClick={onDeleteProductHandler}
+                                      onClick={onDestroyProductHandler}
                                       className="btn btn-danger mr-2"
                                       data-id={product._id}>Xoá</button>
                                   <button
