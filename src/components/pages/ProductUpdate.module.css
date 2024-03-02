@@ -20,7 +20,9 @@
 .product-name,
 .category,
 .short-description,
-.long-description {
+.long-description,
+.price,
+.quantity {
   display: flex;
   flex-direction: column;
   margin-top: 20px;

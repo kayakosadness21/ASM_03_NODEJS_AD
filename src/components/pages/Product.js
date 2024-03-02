@@ -17,35 +17,6 @@ const Product = () => {
 
   const url = `${environment.api.url}${environment.api.product.origin}`;
 
-  // componentDidMount
-  // useEffect(() => {
-  //   dispatch(getAllProductAPI());
-  //   dispatch({ type: "ACTIVE_PRODUCT_PAGE" });
-  // }, []);
-
-  // rerender when get all product from DB
-  // useEffect(() => {
-  //   setProducts(productList);
-  // }, [productList]);
-
-  // handle status delete
-  // useEffect(() => {
-  //   if (deleteNotSucceed) {
-  //     alert("Can not delete. This product is used by order collection");
-  //     dispatch({ type: "CLEAR_DELETE_SUCCEED" });
-  //   }
-  // }, [deleteNotSucceed]);
-
-  // search function
-  // const searchProductHandler = (e) => {
-  //   // search product by name
-  //   const searchResult = productList.filter((item) => {
-  //     return item.name.toLowerCase().includes(e.target.value.toLowerCase());
-  //   });
-  //   // set product to showup
-  //   setProducts(searchResult);
-  // };
-
   useEffect(() => {
     let callApi = async () => {
       let res = await fetch(url, {
@@ -68,18 +39,18 @@ const Product = () => {
   }, [])
 
   // crud handler
-  const crudHandler = (type, productId) => {
-    if (type === "delete") {
-      if (!window.confirm(`Do you want to delete id: ${productId}?`)) return;
-      dispatch(deleteProductAPI(productId));
-    }
-    if (type === "update") {
-      navigate(`/products/update/${productId}`);
-      // const searchResult=data.filter(item=>item._id!==payload)
-      // setProducts(searchResult)
-      // return
-    }
-  };
+  // const crudHandler = (type, productId) => {
+  //   if (type === "delete") {
+  //     if (!window.confirm(`Do you want to delete id: ${productId}?`)) return;
+  //     dispatch(deleteProductAPI(productId));
+  //   }
+  //   if (type === "update") {
+  //     navigate(`/products/update/${productId}`);
+  //     // const searchResult=data.filter(item=>item._id!==payload)
+  //     // setProducts(searchResult)
+  //     // return
+  //   }
+  // };
 
   const onDeleteProductHandler = (event) => {
     let { id } = event.target.dataset;
@@ -89,6 +60,11 @@ const Product = () => {
   const addNewHandler = () => {
     navigate("/products/add-new");
   };
+
+  const onUpdateProductHandler = (event) => {
+    let { id } = event.target.dataset;
+    navigate(`/products/update/${id}`);
+  }
 
   return (
     <div className={classes["product-container"]}>
@@ -128,6 +104,7 @@ const Product = () => {
                                       className="btn btn-danger mr-2"
                                       data-id={product._id}>Xoá</button>
                                   <button
+                                    onClick={onUpdateProductHandler}
                                       data-id={product._id}
                                       className="btn btn-warning">Sửa</button>
                               </td>
