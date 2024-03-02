@@ -13,7 +13,7 @@ const Product = () => {
     (state) => state.productReducer
   );
   const dispatch = useDispatch();
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
 
   const url = `${environment.api.url}${environment.api.product.origin}`;
 
@@ -59,6 +59,7 @@ const Product = () => {
       let { status, products} = await res.json();
       if(status) {
           console.log(products);
+          setProducts(products);
       }
   }
 
@@ -80,6 +81,11 @@ const Product = () => {
     }
   };
 
+  const onDeleteProductHandler = (event) => {
+    let { id } = event.target.dataset;
+    console.log(id);
+  }
+
   const addNewHandler = () => {
     navigate("/products/add-new");
   };
@@ -88,22 +94,48 @@ const Product = () => {
     <div className={classes["product-container"]}>
       <BannerShop text={{ left: "ADMIN", right: "ADMIN" }} />
       <div className={classes["product-content"]}>
-        {/* <div>
-          <h4>Products</h4>
-          <input
-            type="text"
-            placeholder="Enter search"
-            onChange={searchProductHandler}
-          />
-        </div> */}
 
         <div className={classes["product-table-container"]}>
           <button className={classes["add-new-btn"]} onClick={addNewHandler}>
             Add New +
           </button>
-          {/* {productList?.length > 0 && (
-            <ProductTable products={products} crud={crudHandler} />
-          )} */}
+
+          <table className="table">
+              <thead>
+                  <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Tên sản phẩm</th>
+                  <th scope="col">Ảnh</th>
+                  <th scope="col">Giá</th>
+                  <th scope="col">Số lượng</th>
+                  <th scope="col">Chức năng</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {products.length > 0 && products.map((product, index) => {
+                      return (
+                          <tr key={product._id}>
+                              <th scope="row">{index}</th>
+                              <td>{product.name}</td>
+                              <td>
+                                <img style={{width: "90px"}} src={product.images[0]} alt=""/>
+                              </td>
+                              <td>{product.price}</td>
+                              <td>{product?.quantity}</td>
+                              <td>
+                                  <button
+                                      onClick={onDeleteProductHandler}
+                                      className="btn btn-danger mr-2"
+                                      data-id={product._id}>Xoá</button>
+                                  <button
+                                      data-id={product._id}
+                                      className="btn btn-warning">Sửa</button>
+                              </td>
+                          </tr>
+                      )
+                  })}
+              </tbody>
+          </table>
         </div>
       </div>
     </div>
