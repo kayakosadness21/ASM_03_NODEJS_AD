@@ -20,7 +20,8 @@ const environment = {
             },
             product: {
                 origin: "/product",
-                newProduct: "/product/new"
+                newProduct: "/product/new",
+                updateProduct: "/product/update"
             }
         }
     },

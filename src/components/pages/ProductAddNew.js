@@ -183,6 +183,7 @@ const ProductAddNew = () => {
             ref={refLongDescription}
           />
         </div>
+
         <div className={classes["price"]}>
           <label htmlFor="price">Price</label>
           <input
@@ -194,6 +195,7 @@ const ProductAddNew = () => {
             max={100000000}
           />
         </div>
+
         <div className={classes["quantity"]}>
           <label htmlFor="quantity">Quantity</label>
           <input
@@ -205,6 +207,7 @@ const ProductAddNew = () => {
             max={1000}
           />
         </div>
+        
         <div className={classes["upload-image"]}>
           <p htmlFor="upload-image">Upload image (4 images)</p>
           <input
