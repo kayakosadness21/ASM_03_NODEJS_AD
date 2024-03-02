@@ -5,18 +5,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { addNewProductAPI } from "../lib/api-product";
 import CommonUtils from "../util/CommonUtils";
+import environment from "../../environment";
 
 const ProductAddNew = () => {
   const { user } = useSelector((state) => state.logInReducer);
   const { succeed } = useSelector((state) => state.productReducer);
   const [images, setImages] = useState([]); // get URL & Base64 of select files
   const [imageFiles, setImageFiles] = useState({});
+
+  const url = `${environment.api.url}${environment.api.product.newProduct}`;
+
   const refProductName = useRef();
   const refCategory = useRef();
   const refShortDescription = useRef();
   const refLongDescription = useRef();
   const refProductPrice = useRef();
   const refProductQuantity = useRef();
+  const refProductImages = useRef();
+
+  const localState = JSON.parse(localStorage.getItem("cartState"));
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -58,29 +66,50 @@ const ProductAddNew = () => {
     }
     return true;
   };
+
   // add new product
-  const addNewProductHandler = (e) => {
+  const addNewProductHandler = async(e) => {
     e.preventDefault();
     if (!isValidInput()) return;
-    const productAddNew = {
-      name: refProductName.current.value,
-      category: refCategory.current.value,
-      short_desc: refShortDescription.current.value,
-      long_desc: refLongDescription.current.value,
-      price: refProductPrice.current.value,
-      quantity: refProductQuantity.current.value,
-      images: [...imageFiles],
-    };
-    // console.log("CHECK imageFiles: ", productAddNew);
-    dispatch(addNewProductAPI({ userId: user.userId, product: productAddNew }));
+    
+    let productForm = new FormData();
+    productForm.append('name', refProductName.current.value);
+    productForm.append('category', refCategory.current.value);
+    productForm.append('short_desc',refShortDescription.current.value);
+    productForm.append('long_desc', refLongDescription.current.value);
+    productForm.append('price', refProductPrice.current.value);
+    productForm.append('quantity', refProductQuantity.current.value);
+
+    if(imageFiles.length) {
+        for(let file of imageFiles) {
+          productForm.append('photos', file);
+        }
+    }
+
+    let res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        "Authorization": localState.logInReducer.user.token
+      },
+      body: productForm
+    })
+
+    if(!res.ok) throw new Error("Call api unsuccess");
+    let { status } = await res.json();
+
+    if(status) {
+      navigate("/products");
+    }
+
   };
 
-  // waiting for save succeed, then navigation to /products
+  // // waiting for save succeed, then navigation to /products
   useEffect(() => {
     if (!succeed) return;
     dispatch({ type: "CLEAR_SUCCEED" });
     navigate("/products");
   }, [succeed]);
+
   // get file image when select
   const filesSelectedHandler = async (e) => {
     const data = e.target.files;
@@ -179,6 +208,7 @@ const ProductAddNew = () => {
         <div className={classes["upload-image"]}>
           <p htmlFor="upload-image">Upload image (4 images)</p>
           <input
+            ref={refProductImages}
             id="upload-image"
             type="file"
             accept=".jpg,.jpeg,.png,.gif"
