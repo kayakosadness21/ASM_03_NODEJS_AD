@@ -17,6 +17,10 @@ const environment = {
                 newRole: "/role/new",
                 updateRole: '/role/update',
                 destroyRole: '/role/destroy'
+            },
+            product: {
+                origin: "/product",
+                newProduct: "/product/new"
             }
         }
     },
