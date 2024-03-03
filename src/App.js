@@ -21,6 +21,9 @@ import PageRoleHome from "./components/pages/page-role/page-role-home/page-role-
 import PageRoleAdd from "./components/pages/page-role/page-role-add/page-role-add";
 import PageRoleEdit from "./components/pages/page-role/page-role-edit/page-role-edit";
 
+// CHATBOX
+import PageChat from "./components/pages/page-chat/page-chat";
+
 function App() {
   const { isLoggedIn, isAdmin } = useSelector((state) => state.logInReducer);
 
@@ -77,7 +80,7 @@ function App() {
           path="/roles-edit/:id"
           element={isLoggedIn && isAdmin ? <PageRoleEdit /> : ""}
         />
-        <Route path="/chat-room" element={isLoggedIn ? <ChatRoom /> : ""} />
+        <Route path="/chat-room" element={isLoggedIn ? <PageChat /> : ""} />
       </Routes>
     </Layout>
   );
