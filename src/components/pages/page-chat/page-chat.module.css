@@ -50,10 +50,45 @@
 
 .chat-content-messages {
     background-color: #fdfdfd;
-    height: calc(100% - 100px);
+    height: 430px;
     margin-bottom: 20px;
+    padding: 15px;
     overflow-y: auto;
     width: 100%;
+}
+
+.message-items {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.message-items-admin {
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+}
+
+.message-items .message-items_thumb {
+    margin-right: 10px;
+}
+
+.message-items-admin .message-items_thumb {
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+.message-items .message-items_thumb img {
+    width: 40px;
+}
+
+.message-items_content {
+    display: block;
+    width: 50%;
+    word-break: break-word;
+}
+
+.message-items-admin .message-items_content {
+    text-align: right;
 }
 
 .chat-content-input {
