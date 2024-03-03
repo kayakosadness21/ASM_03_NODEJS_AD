@@ -40,6 +40,22 @@
 .chat-tab-items img {
     width: 40px;
 }
+.chat-tab-tems_infor {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.infor-user {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .3px;
+}
+
+.infor-role {
+    font-size: 14px;
+}
 
 .chat-content {
     background-color: #e4e7e4;
