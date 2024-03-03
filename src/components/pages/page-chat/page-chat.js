@@ -12,6 +12,7 @@ const PageChat = (props) => {
         shareSocket.socket?.on("LIST-USER-ONLINE", (data) => {
             setListUser([]);
             let { list } = data;
+            console.log(list);
             setListUser(list);
         })
 
@@ -36,7 +37,14 @@ const PageChat = (props) => {
                                         <span className={classes['chat-tab-tems_thumb']}>
                                             <img src="assets/images/user_blank.png" alt="" />
                                         </span>
-                                        <span>test</span>
+                                        <div className={classes['chat-tab-tems_infor']}>
+                                            <span className={classes['infor-user']}>
+                                                {elm.user.fullName}
+                                            </span>
+                                            <span className={classes['infor-role']}>
+                                                {elm.user.role.title}
+                                            </span>
+                                        </div>
                                     </li>
                                 )
                             })}

@@ -34,11 +34,6 @@ const NavBar = () => {
       case "login":
         navigate("/");
         break;
-      // case "logout":
-      //   localStorage.removeItem("cartState");
-      //   dispatch({ type: "ON_LOGOUT" });
-      //   navigate("/");
-      //   break;
       case "chatRoom":
         navigate("/chat-room");
         break;
