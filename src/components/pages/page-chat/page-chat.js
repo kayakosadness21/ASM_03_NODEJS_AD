@@ -4,7 +4,10 @@ import classes from "./page-chat.module.css";
 
 const PageChat = (props) => {
     const shareSocket = useSelector((state) => state.storeSocket);
+    const { user } = useSelector((state) => state.logInReducer);
+
     const [listUser, setListUser] = useState([]);
+    const [messages, setMessages] = useState([]);
     const messageRef = useRef();
 
 
@@ -14,6 +17,14 @@ const PageChat = (props) => {
             let { list } = data;
             console.log(list);
             setListUser(list);
+        })
+
+        shareSocket.socket?.on("CLIENT-ADMIN-CHOOSE", (data) => {
+            console.log(data);
+            let { client } = data;
+            if(client) {
+                setMessages(client.message);
+            }
         })
 
     }, [shareSocket.socket])
@@ -26,11 +37,13 @@ const PageChat = (props) => {
     }
 
     const onChooseAccountSupport = (e) => {
-        let { type } = e.target.dataset;
+        let { type, email } = e.target.dataset;
 
         if(type == 'Admin') {
             window.confirm("Can't support Admin account");
         }
+
+        shareSocket.socket.emit('ADMIN-CHOOSE-CLIENT-SUPPORT', {id: user.userId, email});
     }
 
     return (
@@ -45,6 +58,7 @@ const PageChat = (props) => {
                                         onClick={onChooseAccountSupport}
                                         key={elm._id}
                                         data-type={elm.user?.role?.title}
+                                        data-email={elm?.email}
                                         className={classes['chat-tab-items']}>
                                         <span className={classes['chat-tab-tems_thumb']}>
                                             <img src="assets/images/user_blank.png" alt="" />
@@ -66,7 +80,7 @@ const PageChat = (props) => {
                     <div className="col-8">
                         <div className={classes['chat-content']}>
                             <div className={classes['chat-content-messages']}>
-                                <div className={`${classes['message-items']}`}>
+                                {/* <div className={`${classes['message-items']}`}>
                                     <span className={classes['message-items_thumb']}>
                                         <img src="assets/images/user_blank.png" alt="" />
                                     </span>
@@ -78,7 +92,21 @@ const PageChat = (props) => {
                                         <img src="assets/images/user_blank.png" alt="" />
                                     </span>
                                     <span className={classes['message-items_content']}>Hello Client</span>
-                                </div>
+                                </div> */}
+
+                                {messages?.length > 0 && messages.map((message, index) => {
+                                    return (
+                                        <div key={index}
+                                        className={`
+                                            ${classes['message-items']}
+                                            ${message.type === 'Client'? '' : classes['message-items-admin']}`}>
+                                            <span className={classes['message-items_thumb']}>
+                                                <img src="assets/images/user_blank.png" alt="" />
+                                            </span>
+                                            <span className={classes['message-items_content']}>{message.content}</span>
+                                        </div>
+                                    )
+                                })}
                             </div>
                             <div className={classes['chat-content-input']}>
                                 <input
