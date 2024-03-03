@@ -1,5 +1,9 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import openSocket from "socket.io-client";
+import environment from "./environment";
+
 import "./App.css";
 import Layout from "./components/layout/Layout";
 import RegisterPage from "./components/pages/RegisterPage";
@@ -25,7 +29,13 @@ import PageRoleEdit from "./components/pages/page-role/page-role-edit/page-role-
 import PageChat from "./components/pages/page-chat/page-chat";
 
 function App() {
+  const dispatch = useDispatch();
   const { isLoggedIn, isAdmin } = useSelector((state) => state.logInReducer);
+
+  useEffect(() => {
+    let socket = openSocket(environment.api.url);
+    dispatch({type: 'SHARE-SOCKET', socket});
+  }, [])
 
   return (
     <Layout>
