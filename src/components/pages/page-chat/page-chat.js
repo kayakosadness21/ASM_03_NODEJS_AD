@@ -1,6 +1,13 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import classes from "./page-chat.module.css";
 
 const PageChat = (props) => {
+    const shareSocket = useSelector((state) => state.storeSocket);
+
+    useEffect(() => {
+        shareSocket.socket?.emit('TEST', {message: 'Hello server'});
+    }, [])
 
     return (
         <div className={classes['page-chat-component']}>
