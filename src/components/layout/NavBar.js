@@ -6,13 +6,19 @@ import classes from "./NavBar.module.css";
 const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { loginPage, chatRoomPage, productPage, dashboardPage } = useSelector(
     (state) => state.navBarActiveReducer
   );
+
   const { isLoggedIn, user, isAdmin } = useSelector(
     (state) => state.logInReducer
   );
+  const shareSocket = useSelector((state) => state.storeSocket);
+
+
   const [active, setActive] = useState();
+
   useEffect(() => {
     return () => {
       setActive(null);
@@ -28,11 +34,11 @@ const NavBar = () => {
       case "login":
         navigate("/");
         break;
-      case "logout":
-        localStorage.removeItem("cartState");
-        dispatch({ type: "ON_LOGOUT" });
-        navigate("/");
-        break;
+      // case "logout":
+      //   localStorage.removeItem("cartState");
+      //   dispatch({ type: "ON_LOGOUT" });
+      //   navigate("/");
+      //   break;
       case "chatRoom":
         navigate("/chat-room");
         break;
@@ -52,6 +58,15 @@ const NavBar = () => {
         navigate("/");
     }
   };
+
+
+  const onLogoutHandler = (e) => {
+    shareSocket.socket?.emit("ADMIN-SIGNOUT", {email: user.email});
+    localStorage.removeItem("cartState");
+    dispatch({ type: "ON_LOGOUT" });
+    navigate("/");
+  }
+
   return (
     // NavBar container
     <div className={classes.container}>
@@ -134,6 +149,7 @@ const NavBar = () => {
             </div>
           </li>
         )}
+
         {isLoggedIn && (
           <li>
             <svg
@@ -143,7 +159,7 @@ const NavBar = () => {
             >
               <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
             </svg>
-            <div onClick={onClickHandler}>
+            <div onClick={onLogoutHandler}>
               {user.fullName}
               <svg
                 className={classes["login-icon-arrow-down"]}

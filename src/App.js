@@ -30,12 +30,16 @@ import PageChat from "./components/pages/page-chat/page-chat";
 
 function App() {
   const dispatch = useDispatch();
-  const { isLoggedIn, isAdmin } = useSelector((state) => state.logInReducer);
+  const { isLoggedIn, isAdmin, user } = useSelector((state) => state.logInReducer);
 
   useEffect(() => {
-    let socket = openSocket(environment.api.url);
-    dispatch({type: 'SHARE-SOCKET', socket});
-  }, [])
+    if(user) {
+      let socket = openSocket(environment.api.url);
+      socket.emit("ADMIN-SIGNIN", {id: user.userId, email: user.email});
+      dispatch({type: 'SHARE-SOCKET', socket});
+    }
+
+  }, [user])
 
   return (
     <Layout>
