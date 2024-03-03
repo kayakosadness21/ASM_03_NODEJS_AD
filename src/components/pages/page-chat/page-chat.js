@@ -39,10 +39,10 @@ const PageChat = (props) => {
                                         </span>
                                         <div className={classes['chat-tab-tems_infor']}>
                                             <span className={classes['infor-user']}>
-                                                {elm.user.fullName}
+                                                {elm.user?.fullName}
                                             </span>
                                             <span className={classes['infor-role']}>
-                                                {elm.user.role.title}
+                                                {elm.user?.role?.title}
                                             </span>
                                         </div>
                                     </li>
