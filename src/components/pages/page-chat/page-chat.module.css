@@ -93,6 +93,31 @@
 
 .chat-content-input {
     background-color: #fdfdfd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     height: 80px;
+    padding: 15px;
     width: 100%;
+}
+
+.input-message-content {
+    border: 1px solid #ebebeb;
+    padding: 10px;
+    width: calc(100% - (10% + 15px));
+}
+
+.input-message-content:focus {
+    outline-color: #cdcdcd;
+}
+
+.button-send-message-content {
+    background-color: transparent;
+    border: unset;
+    outline: unset;
+    width: calc(10% - 15px);
+}
+
+.button-send-message-content svg {
+    fill: rgb(72, 176, 247) !important;
 }
