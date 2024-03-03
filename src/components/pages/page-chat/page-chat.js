@@ -16,12 +16,20 @@ const PageChat = (props) => {
             setListUser(list);
         })
 
-    }, [shareSocket])
+    }, [shareSocket.socket])
 
     const onSendMessageHandler = (e) => {
         let message = messageRef.current.value;
         if(message.trim()) {
             console.log(message);
+        }
+    }
+
+    const onChooseAccountSupport = (e) => {
+        let { type } = e.target.dataset;
+
+        if(type == 'Admin') {
+            window.confirm("Can't support Admin account");
         }
     }
 
@@ -33,7 +41,11 @@ const PageChat = (props) => {
                         <ul className={classes['chat-tab']}>
                             {listUser.length > 0 && listUser.map((elm) => {
                                 return (
-                                    <li key={elm._id} className={classes['chat-tab-items']}>
+                                    <li
+                                        onClick={onChooseAccountSupport}
+                                        key={elm._id}
+                                        data-type={elm.user?.role?.title}
+                                        className={classes['chat-tab-items']}>
                                         <span className={classes['chat-tab-tems_thumb']}>
                                             <img src="assets/images/user_blank.png" alt="" />
                                         </span>
