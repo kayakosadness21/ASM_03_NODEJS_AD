@@ -1,14 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import classes from "./page-chat.module.css";
 
 const PageChat = (props) => {
     const shareSocket = useSelector((state) => state.storeSocket);
+    const [listUser, setListUser] = useState([]);
     const messageRef = useRef();
 
+
     useEffect(() => {
-        shareSocket.socket?.emit('TEST', {message: 'Hello server'});
-    }, [])
+        shareSocket.socket?.on("LIST-USER-ONLINE", (data) => {
+            setListUser([]);
+            let { list } = data;
+            setListUser(list);
+        })
+
+    }, [shareSocket])
 
     const onSendMessageHandler = (e) => {
         let message = messageRef.current.value;
@@ -23,12 +30,16 @@ const PageChat = (props) => {
                 <div className="row">
                     <div className="col-4">
                         <ul className={classes['chat-tab']}>
-                            <li className={classes['chat-tab-items']}>
-                                <span className={classes['chat-tab-tems_thumb']}>
-                                    <img src="assets/images/user_blank.png" alt="" />
-                                </span>
-                                <span>test</span>
-                            </li>
+                            {listUser.length > 0 && listUser.map((elm) => {
+                                return (
+                                    <li key={elm._id} className={classes['chat-tab-items']}>
+                                        <span className={classes['chat-tab-tems_thumb']}>
+                                            <img src="assets/images/user_blank.png" alt="" />
+                                        </span>
+                                        <span>test</span>
+                                    </li>
+                                )
+                            })}
                         </ul>
                     </div>
 
