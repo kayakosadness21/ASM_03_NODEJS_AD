@@ -32,7 +32,6 @@ export const loginAPI = (user) => {
     // 200 = ok
     if (res.status === 200) {
       const data = await res.json();
-      console.log(data);
       dispatch({ type: "ON_LOGIN", payload: data });
     }
   };
