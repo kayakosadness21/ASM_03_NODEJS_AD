@@ -16,15 +16,16 @@ const PageChat = (props) => {
         shareSocket.socket?.on("LIST-USER-ONLINE", (data) => {
             setListUser([]);
             let { list } = data;
-            console.log(list);
             setListUser(list);
         })
 
         shareSocket.socket?.on("CLIENT-ADMIN-CHOOSE", (data) => {
-            let { client } = data;
+            let { client, list } = data;
+            setListUser([]);
             if(client) {
                 setClient(client);
                 setMessages(client.message);
+                setListUser(list);
             }
         })
 
@@ -55,13 +56,15 @@ const PageChat = (props) => {
         }
 
         shareSocket.socket?.emit("ADMIN-SEND-MESSAGE-TO-CLIENT", {client, message});
+        messageRef.current.value = "";
     }
 
-    const onChooseAccountSupport = (e) => {
-        let { type, email } = e.target.dataset;
+    const onChooseAccountSupport = (payload) => {
+        let { role, email, care } = payload;
 
-        if(type == 'Admin') {
-            window.confirm("Can't support Admin account");
+        if(role == 'Admin' || care) {
+            window.confirm("Can't support user account is Admin of account have support!");
+            return
         }
 
         shareSocket.socket.emit('ADMIN-CHOOSE-CLIENT-SUPPORT', {id: user.userId, email});
@@ -75,12 +78,20 @@ const PageChat = (props) => {
                         <ul className={classes['chat-tab']}>
                             {listUser.length > 0 && listUser.map((elm) => {
                                 return (
-                                    <li
-                                        onClick={onChooseAccountSupport}
+                                    <li onClick={
+                                            (e) => onChooseAccountSupport({
+                                                role: elm.user?.role?.title,
+                                                email: elm?.email,
+                                                care: elm?.current_care
+                                            })
+                                        }
                                         key={elm._id}
-                                        data-type={elm.user?.role?.title}
-                                        data-email={elm?.email}
-                                        className={classes['chat-tab-items']}>
+                                        // data-type={elm.user?.role?.title} data-email={elm?.email}
+                                        className={`
+                                            ${classes['chat-tab-items']}
+                                            ${elm?.current_care? classes['user-have-admin-support'] : ''}
+                                        `}>
+
                                         <span className={classes['chat-tab-tems_thumb']}>
                                             <img src="assets/images/user_blank.png" alt="" />
                                         </span>
@@ -88,9 +99,14 @@ const PageChat = (props) => {
                                             <span className={classes['infor-user']}>
                                                 {elm.user?.fullName}
                                             </span>
-                                            <span className={classes['infor-role']}>
-                                                {elm.user?.role?.title}
-                                            </span>
+                                            <div className={classes['infor-account']}>
+                                                <span className={classes['infor-role']}>
+                                                    Role: {elm.user?.role?.title}
+                                                </span>
+                                                <span className={classes['infor-role']}>
+                                                    support: {elm?.current_care ? elm?.current_care : 'Blank'}
+                                                </span>
+                                            </div>
                                         </div>
                                     </li>
                                 )
