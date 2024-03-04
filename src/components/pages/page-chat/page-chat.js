@@ -27,6 +27,20 @@ const PageChat = (props) => {
             }
         })
 
+        shareSocket.socket?.on("CLIENT-SEND-MESSAGE-TO-ADMIN-SUPPORT", (data) => {
+            let { user: userClient } = data;
+
+            console.log(user.email);
+            console.log(userClient.current_care)
+            console.log(user.email === userClient.current_care)
+            setMessages([]);
+            if(user.email == userClient.current_care) {
+                setMessages(userClient.message);
+                // console.log(user);
+                // console.log(userClient);
+            }
+        })
+
     }, [shareSocket.socket])
 
     const onSendMessageHandler = (e) => {
@@ -80,20 +94,6 @@ const PageChat = (props) => {
                     <div className="col-8">
                         <div className={classes['chat-content']}>
                             <div className={classes['chat-content-messages']}>
-                                {/* <div className={`${classes['message-items']}`}>
-                                    <span className={classes['message-items_thumb']}>
-                                        <img src="assets/images/user_blank.png" alt="" />
-                                    </span>
-                                    <span className={classes['message-items_content']}>Hello Admin</span>
-                                </div>
-
-                                <div className={`${classes['message-items']} ${classes['message-items-admin']}`}>
-                                    <span className={classes['message-items_thumb']}>
-                                        <img src="assets/images/user_blank.png" alt="" />
-                                    </span>
-                                    <span className={classes['message-items_content']}>Hello Client</span>
-                                </div> */}
-
                                 {messages?.length > 0 && messages.map((message, index) => {
                                     return (
                                         <div key={index}
