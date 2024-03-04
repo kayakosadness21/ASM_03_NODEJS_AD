@@ -2,6 +2,7 @@
     padding: 45px 0px;
 }
 
+/* TAB */
 .chat-tab {
     background-color: #fbfbfb;
     display: block;
@@ -48,6 +49,16 @@
     flex-direction: column;
 }
 
+.user-have-admin-support {
+    background-color: #d6d777;
+}
+
+.infor-account {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
 .infor-user {
     font-size: 16px;
     font-weight: 700;
@@ -57,6 +68,8 @@
 .infor-role {
     font-size: 14px;
 }
+
+/* CHAT CONTENT */
 
 .chat-content {
     background-color: #e4e7e4;
@@ -107,6 +120,8 @@
 .message-items-admin .message-items_content {
     text-align: right;
 }
+
+/* CHAT INPUT */
 
 .chat-content-input {
     background-color: #fdfdfd;
